@@ -1,34 +1,57 @@
-export const initialTasks = [
-  {
-    id: 1,
-    title: "Review React Testing Library queries",
-    description:
-      "Practice choosing between getBy, queryBy, and findBy queries.",
-    priority: "high",
-    completed: false,
-  },
-  {
-    id: 2,
-    title: "Write user interaction tests",
-    description:
-      "Test task interactions using userEvent instead of implementation details.",
-    priority: "medium",
-    completed: false,
-  },
-  {
-    id: 3,
-    title: "Review Vitest configuration",
-    description:
-      "Understand the jsdom environment, setup file, and test scripts.",
-    priority: "low",
-    completed: true,
-  },
-  {
-    id: 4,
-    title: "Practice mocked API states",
-    description:
-      "Cover loading, success, error, and empty states for the task list.",
-    priority: "high",
-    completed: false,
-  },
-];
+const API_URL = "http://localhost:3000/tasks";
+
+export async function getTasks({ signal } = {}) {
+  const response = await fetch(API_URL, {
+    signal,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch tasks");
+  }
+
+  return response.json();
+}
+
+export async function createTask(task) {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(task),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to create task");
+  }
+
+  return response.json();
+}
+
+export async function updateTask(id, updates) {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updates),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update task");
+  }
+
+  return response.json();
+}
+
+export async function deleteTask(id) {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete task");
+  }
+
+  return response.json();
+}
