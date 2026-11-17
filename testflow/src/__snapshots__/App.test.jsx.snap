@@ -1,0 +1,68 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TestFlow task management > renders the TaskCard snapshot 1`] = `
+<article
+  class="task-card "
+>
+  <div
+    class="task-card-content"
+  >
+    <div
+      class="task-card-heading"
+    >
+      <div
+        class="task-title-row"
+      >
+        <input
+          aria-label="Mark Write user interaction tests as completed"
+          type="checkbox"
+        />
+        <h3>
+          Write user interaction tests
+        </h3>
+      </div>
+      <span
+        class="priority-badge priority-Medium"
+      >
+        Medium
+      </span>
+    </div>
+    <p>
+      Cover important user workflows.
+    </p>
+  </div>
+  <div
+    class="task-card-status"
+  >
+    <span
+      aria-label="Active"
+      class="task-status"
+    >
+      Active
+    </span>
+    <div
+      class="task-actions"
+    >
+      <a
+        aria-label="View details for Write user interaction tests"
+        data-discover="true"
+        href="/tasks/2"
+      >
+        View details
+      </a>
+      <button
+        aria-label="Mark Write user interaction tests as complete"
+        type="button"
+      >
+        Complete
+      </button>
+      <button
+        aria-label="Delete Write user interaction tests"
+        type="button"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</article>
+`;
