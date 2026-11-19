@@ -127,6 +127,7 @@ a {
 }
 
 /* Search form and recent search dropdown */
+
 .search-area {
   position: relative;
   width: min(100%, 650px);
@@ -291,6 +292,8 @@ a {
   border: 0;
 }
 
+/* Results and favorites sections */
+
 .results-section,
 .favorites-section {
   width: min(100% - 48px, 1100px);
@@ -388,6 +391,8 @@ a {
 .favorites-empty-state {
   margin-top: 8px;
 }
+
+/* Movie cards */
 
 .movie-grid {
   display: grid;
@@ -532,6 +537,8 @@ a {
   font-size: 14px;
 }
 
+/* Footer */
+
 .site-footer {
   display: flex;
   flex-wrap: wrap;
@@ -549,6 +556,7 @@ a {
 }
 
 /* Movie details modal */
+
 .modal-backdrop {
   position: fixed;
   z-index: 1000;
@@ -704,6 +712,8 @@ a {
   cursor: pointer;
 }
 
+/* Tablet and mobile responsive styles */
+
 @media (max-width: 700px) {
   .site-header {
     padding: 16px 20px;
@@ -788,6 +798,29 @@ a {
 
   .recent-search-item {
     padding: 12px 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .movie-info {
+    padding: 14px;
+  }
+
+  .favorite-button {
+    padding: 13px 8px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-poster-container {
+    width: min(75%, 220px);
   }
 }
 

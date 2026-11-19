@@ -1,6 +1,8 @@
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
+import MovieCard from "./components/MovieCard";
+import MovieDetailsModal from "./components/MovieDetailsModal";
+import SearchBar from "./components/SearchBar";
 
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const FAVORITES_KEY = "smart-movie-explorer-favorites";
@@ -25,42 +27,10 @@ function loadRecentSearches() {
   const saved = loadFromStorage(RECENT_SEARCHES_KEY, []);
 
   return Array.isArray(saved)
-    ? saved.filter(
-        (item) => typeof item === "string" && item.trim().length > 0,
-      ).slice(0, MAX_RECENT_SEARCHES)
+    ? saved
+        .filter((item) => typeof item === "string" && item.trim().length > 0)
+        .slice(0, MAX_RECENT_SEARCHES)
     : [];
-}
-
-function MoviePoster({ src, title, className = "movie-poster" }) {
-  const [failedSrc, setFailedSrc] = useState("");
-  const isModalPoster = className === "modal-poster";
-
-  if (!src || src === "N/A" || failedSrc === src) {
-    return (
-      <div
-        className={
-          isModalPoster
-            ? "poster-placeholder modal-poster"
-            : "poster-placeholder"
-        }
-        role="img"
-        aria-label={`Poster unavailable for ${title}`}
-      >
-        <span aria-hidden="true">🎞️</span>
-        <span>Poster unavailable</span>
-      </div>
-    );
-  }
-
-  return (
-    <img
-      className={className}
-      src={src}
-      alt={`${title} poster`}
-      loading="lazy"
-      onError={() => setFailedSrc(src)}
-    />
-  );
 }
 
 function App() {
@@ -71,9 +41,7 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
 
   const [favorites, setFavorites] = useState(loadFavorites);
-  const [recentSearches, setRecentSearches] = useState(
-    loadRecentSearches,
-  );
+  const [recentSearches, setRecentSearches] = useState(loadRecentSearches);
   const [showRecentSearches, setShowRecentSearches] = useState(false);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -96,10 +64,7 @@ function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem(
-        RECENT_SEARCHES_KEY,
-        JSON.stringify(recentSearches),
-      );
+      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(recentSearches));
     } catch {
       // Recent searches remain available in React state for this session.
     }
@@ -170,12 +135,14 @@ function App() {
   }
 
   function rememberSearch(searchTerm) {
-    setRecentSearches((currentSearches) => [
-      searchTerm,
-      ...currentSearches.filter(
-        (item) => item.toLowerCase() !== searchTerm.toLowerCase(),
-      ),
-    ].slice(0, MAX_RECENT_SEARCHES));
+    setRecentSearches((currentSearches) =>
+      [
+        searchTerm,
+        ...currentSearches.filter(
+          (item) => item.toLowerCase() !== searchTerm.toLowerCase(),
+        ),
+      ].slice(0, MAX_RECENT_SEARCHES),
+    );
   }
 
   async function handleSearch(event, searchOverride) {
@@ -284,7 +251,6 @@ function App() {
       }
     }
   }
-
   function handleRecentSearchClick(searchTerm) {
     setQuery(searchTerm);
     setShowRecentSearches(false);
@@ -361,44 +327,19 @@ function App() {
     const saved = isFavorite(movie.imdbID);
 
     return (
-      <article className="movie-card-wrapper" key={movie.imdbID}>
-        <button
-          className="movie-card movie-card-button"
-          type="button"
-          onClick={() => handleMovieClick(movie)}
-          aria-label={`View details for ${movie.Title}`}
-        >
-          <MoviePoster src={movie.Poster} title={movie.Title} />
-
-          <div className="movie-info">
-            <h3>{movie.Title}</h3>
-            <p>{movie.Year || "Year unavailable"}</p>
-            <span className="movie-card-link">View details →</span>
-          </div>
-        </button>
-
-        <button
-          className={`favorite-button${saved ? " is-favorite" : ""}`}
-          type="button"
-          onClick={() => toggleFavorite(movie)}
-          aria-pressed={saved}
-          aria-label={
-            saved
-              ? `Remove ${movie.Title} from favorites`
-              : `Add ${movie.Title} to favorites`
-          }
-        >
-          <span aria-hidden="true">{saved ? "♥" : "♡"}</span>
-          {saved ? "Remove favorite" : "Add to favorites"}
-        </button>
-      </article>
+      <MovieCard
+        key={movie.imdbID}
+        movie={movie}
+        saved={saved}
+        onMovieClick={handleMovieClick}
+        onToggleFavorite={toggleFavorite}
+      />
     );
   }
 
   const filteredRecentSearches = recentSearches.filter(
     (item) =>
-      !query.trim() ||
-      item.toLowerCase().includes(query.trim().toLowerCase()),
+      !query.trim() || item.toLowerCase().includes(query.trim().toLowerCase()),
   );
 
   return (
@@ -428,78 +369,19 @@ function App() {
             Explore movies, discover their stories, and find something worth
             watching.
           </p>
-
-          <div className="search-area" ref={searchAreaRef}>
-            <form className="search-form" onSubmit={handleSearch}>
-              <label className="sr-only" htmlFor="movie-search">
-                Search for a movie
-              </label>
-
-              <input
-                id="movie-search"
-                type="search"
-                value={query}
-                onChange={(event) => {
-                  setQuery(event.target.value);
-                  setShowRecentSearches(true);
-                }}
-                onFocus={() => setShowRecentSearches(true)}
-                placeholder="Search a movie, e.g. Interstellar or Dragon 2025..."
-                autoComplete="off"
-                aria-expanded={
-                  showRecentSearches && filteredRecentSearches.length > 0
-                }
-                aria-controls="recent-searches-list"
-              />
-
-              <button type="submit" disabled={loading}>
-                {loading ? "Searching..." : "Search movies"}
-              </button>
-            </form>
-
-            {showRecentSearches && recentSearches.length > 0 && (
-              <div
-                className="recent-searches-dropdown"
-                id="recent-searches-list"
-                aria-label="Recent movie searches"
-              >
-                <div className="recent-searches-heading">
-                  <span>
-                    <span aria-hidden="true">🕘</span> Recent searches
-                  </span>
-
-                  <button
-                    type="button"
-                    className="clear-recent-searches"
-                    onClick={clearRecentSearches}
-                  >
-                    Clear all
-                  </button>
-                </div>
-
-                {filteredRecentSearches.length > 0 ? (
-                  <ul className="recent-searches-list">
-                    {filteredRecentSearches.map((item) => (
-                      <li key={item}>
-                        <button
-                          type="button"
-                          className="recent-search-item"
-                          onClick={() => handleRecentSearchClick(item)}
-                        >
-                          <span aria-hidden="true">↺</span>
-                          <span>{item}</span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="recent-searches-empty">
-                    No matching recent searches.
-                  </p>
-                )}
-              </div>
-            )}
-          </div>
+          <SearchBar
+            query={query}
+            setQuery={setQuery}
+            loading={loading}
+            handleSearch={handleSearch}
+            searchAreaRef={searchAreaRef}
+            showRecentSearches={showRecentSearches}
+            setShowRecentSearches={setShowRecentSearches}
+            recentSearches={recentSearches}
+            filteredRecentSearches={filteredRecentSearches}
+            clearRecentSearches={clearRecentSearches}
+            handleRecentSearchClick={handleRecentSearchClick}
+          />
 
           <p className="search-hint">
             Try a movie title such as Inception, Interstellar, or a title with
@@ -531,9 +413,7 @@ function App() {
                 </span>
               </div>
 
-              <div className="movie-grid">
-                {movies.map(renderMovieCard)}
-              </div>
+              <div className="movie-grid">{movies.map(renderMovieCard)}</div>
             </>
           )}
 
@@ -557,7 +437,6 @@ function App() {
             </div>
           )}
         </section>
-
         <section
           className="favorites-section"
           aria-labelledby="favorites-title"
@@ -574,9 +453,7 @@ function App() {
           </div>
 
           {favorites.length > 0 ? (
-            <div className="movie-grid">
-              {favorites.map(renderMovieCard)}
-            </div>
+            <div className="movie-grid">{favorites.map(renderMovieCard)}</div>
           ) : (
             <div className="empty-state favorites-empty-state">
               <span className="empty-icon" aria-hidden="true">
@@ -598,142 +475,16 @@ function App() {
       </footer>
 
       {selectedMovie && (
-        <div
-          className="modal-backdrop"
-          onMouseDown={handleBackdropClick}
-          role="presentation"
-        >
-          <section
-            className="movie-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            aria-describedby={
-              movieDetails ? "modal-description" : undefined
-            }
-          >
-            <button
-              className="modal-close"
-              type="button"
-              onClick={closeDetails}
-              ref={closeButtonRef}
-              aria-label="Close movie details"
-            >
-              ×
-            </button>
-
-            {detailsLoading && (
-              <div className="modal-status">
-                <p>Loading movie details...</p>
-              </div>
-            )}
-
-            {!detailsLoading && detailsError && (
-              <div className="modal-status error-message" role="alert">
-                <h2 id="modal-title">Unable to load details</h2>
-                <p>{detailsError}</p>
-                <button type="button" onClick={closeDetails}>
-                  Close
-                </button>
-              </div>
-            )}
-
-            {!detailsLoading && movieDetails && (
-              <div className="modal-content">
-                <div className="modal-poster-container">
-                  <MoviePoster
-                    src={movieDetails.Poster}
-                    title={movieDetails.Title}
-                    className="modal-poster"
-                  />
-                </div>
-
-                <div className="modal-details">
-                  <p className="eyebrow">MOVIE DETAILS</p>
-                  <h2 id="modal-title">{movieDetails.Title}</h2>
-
-                  <div className="modal-meta">
-                    {movieDetails.Year && <span>{movieDetails.Year}</span>}
-                    {movieDetails.Rated &&
-                      movieDetails.Rated !== "N/A" && (
-                        <span>{movieDetails.Rated}</span>
-                      )}
-                    {movieDetails.Runtime &&
-                      movieDetails.Runtime !== "N/A" && (
-                        <span>{movieDetails.Runtime}</span>
-                      )}
-                  </div>
-
-                  {movieDetails.imdbRating &&
-                    movieDetails.imdbRating !== "N/A" && (
-                      <p className="imdb-rating">
-                        ⭐ IMDb {movieDetails.imdbRating}/10
-                      </p>
-                    )}
-
-                  <h3>Story</h3>
-                  <p id="modal-description" className="modal-plot">
-                    {movieDetails.Plot && movieDetails.Plot !== "N/A"
-                      ? movieDetails.Plot
-                      : "No plot description is available."}
-                  </p>
-
-                  <div className="detail-list">
-                    {movieDetails.Genre &&
-                      movieDetails.Genre !== "N/A" && (
-                        <p>
-                          <strong>Genre:</strong> {movieDetails.Genre}
-                        </p>
-                      )}
-
-                    {movieDetails.Director &&
-                      movieDetails.Director !== "N/A" && (
-                        <p>
-                          <strong>Director:</strong> {movieDetails.Director}
-                        </p>
-                      )}
-
-                    {movieDetails.Actors &&
-                      movieDetails.Actors !== "N/A" && (
-                        <p>
-                          <strong>Cast:</strong> {movieDetails.Actors}
-                        </p>
-                      )}
-                  </div>
-
-                  {movieDetails.imdbID && (
-                    <a
-                      className="imdb-link"
-                      href={`https://www.imdb.com/title/${encodeURIComponent(
-                        movieDetails.imdbID,
-                      )}/`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      View on IMDb ↗
-                    </a>
-                  )}
-
-                  <button
-                    className={`favorite-button modal-favorite-button${
-                      isFavorite(movieDetails.imdbID) ? " is-favorite" : ""
-                    }`}
-                    type="button"
-                    onClick={() => toggleFavorite(movieDetails)}
-                    aria-pressed={isFavorite(movieDetails.imdbID)}
-                  >
-                    <span aria-hidden="true">
-                      {isFavorite(movieDetails.imdbID) ? "♥" : "♡"}
-                    </span>
-                    {isFavorite(movieDetails.imdbID)
-                      ? "Remove from favorites"
-                      : "Add to favorites"}
-                  </button>
-                </div>
-              </div>
-            )}
-          </section>
-        </div>
+        <MovieDetailsModal
+          movieDetails={movieDetails}
+          detailsLoading={detailsLoading}
+          detailsError={detailsError}
+          closeDetails={closeDetails}
+          closeButtonRef={closeButtonRef}
+          handleBackdropClick={handleBackdropClick}
+          isFavorite={isFavorite}
+          toggleFavorite={toggleFavorite}
+        />
       )}
     </div>
   );
