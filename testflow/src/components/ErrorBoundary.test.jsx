@@ -1,13 +1,5 @@
-
 import { useState } from "react";
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  expect,
-  test,
-  vi,
-} from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -29,9 +21,7 @@ function ResetHarness() {
   const [shouldThrow, setShouldThrow] = useState(true);
 
   return (
-    <AppErrorBoundary
-      onReset={() => setShouldThrow(false)}
-    >
+    <AppErrorBoundary onReset={() => setShouldThrow(false)}>
       <RecoverableChild shouldThrow={shouldThrow} />
     </AppErrorBoundary>
   );
@@ -71,9 +61,7 @@ describe("AppErrorBoundary", () => {
 
     await user.click(screen.getByRole("button", { name: "Try again" }));
 
-    expect(
-      screen.getByText("Recovered child content"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Recovered child content")).toBeInTheDocument();
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 });
