@@ -1,20 +1,19 @@
-
-import { useState } from 'react'
-import './Navbar.css'
+import { useState } from "react";
+import "./Navbar.css";
 
 const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Education', href: '#education' },
-  { label: 'Contact', href: '#contact' },
-]
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Education", href: "#education" },
+  { label: "Contact", href: "#contact" },
+];
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const closeMenu = () => setMenuOpen(false)
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <header className="site-header">
@@ -30,9 +29,11 @@ function Navbar() {
         </a>
 
         <button
-          className={`menu-toggle ${menuOpen ? 'is-active' : ''}`}
+          className={`menu-toggle ${menuOpen ? "is-active" : ""}`}
           type="button"
-          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-label={
+            menuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
           onClick={() => setMenuOpen((open) => !open)}
@@ -42,7 +43,7 @@ function Navbar() {
         </button>
 
         <div
-          className={`navbar-content ${menuOpen ? 'is-open' : ''}`}
+          className={`navbar-content ${menuOpen ? "is-open" : ""}`}
           id="primary-navigation"
         >
           <ul className="navbar-links">
@@ -62,7 +63,7 @@ function Navbar() {
         </div>
       </nav>
     </header>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

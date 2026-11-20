@@ -1,5 +1,4 @@
-
-import './Education.css'
+import "./Education.css";
 
 function Education() {
   return (
@@ -14,9 +13,7 @@ function Education() {
             <span>background.</span>
           </h2>
 
-          <p>
-            The foundation behind my journey into frontend development.
-          </p>
+          <p>The foundation behind my journey into frontend development.</p>
         </div>
 
         <article className="education-card">
@@ -44,7 +41,7 @@ function Education() {
         </article>
       </div>
     </section>
-  )
+  );
 }
 
-export default Education
+export default Education;

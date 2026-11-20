@@ -1,38 +1,37 @@
-
-import './Skills.css'
+import "./Skills.css";
 
 const skillGroups = [
   {
-    number: '01',
-    title: 'Frontend Development',
-    description: 'Building responsive and interactive user interfaces.',
+    number: "01",
+    title: "Frontend Development",
+    description: "Building responsive and interactive user interfaces.",
     skills: [
-      { name: 'HTML & CSS', level: 75 },
-      { name: 'JavaScript', level: 65 },
-      { name: 'React', level: 65 },
+      { name: "HTML & CSS", level: 75 },
+      { name: "JavaScript", level: 65 },
+      { name: "React", level: 65 },
     ],
   },
   {
-    number: '02',
-    title: 'Tools & Integration',
-    description: 'Working with APIs and everyday development tools.',
+    number: "02",
+    title: "Tools & Integration",
+    description: "Working with APIs and everyday development tools.",
     skills: [
-      { name: 'REST APIs', level: 60 },
-      { name: 'Git', level: 70 },
-      { name: 'GitHub', level: 65 },
-      { name: 'Vite', level: 60 },
+      { name: "REST APIs", level: 60 },
+      { name: "Git", level: 70 },
+      { name: "GitHub", level: 65 },
+      { name: "Vite", level: 60 },
     ],
   },
   {
-    number: '03',
-    title: 'Testing',
-    description: 'Writing tests and checking application behaviour.',
+    number: "03",
+    title: "Testing",
+    description: "Writing tests and checking application behaviour.",
     skills: [
-      { name: 'Vitest', level: 60 },
-      { name: 'React Testing Library', level: 60 },
+      { name: "Vitest", level: 60 },
+      { name: "React Testing Library", level: 60 },
     ],
   },
-]
+];
 
 function Skills() {
   return (
@@ -91,7 +90,7 @@ function Skills() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Skills
+export default Skills;

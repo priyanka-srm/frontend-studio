@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import "./Contact.css";
 
@@ -125,9 +124,7 @@ function Contact() {
             )}
 
             {status === "error" && (
-              <p role="alert">
-                Something went wrong. Please try again.
-              </p>
+              <p role="alert">Something went wrong. Please try again.</p>
             )}
 
             <button
@@ -136,9 +133,7 @@ function Contact() {
               disabled={status === "sending"}
             >
               {status === "sending" ? "Sending..." : "Send message"}
-              {status !== "sending" && (
-                <span aria-hidden="true"> ↗</span>
-              )}
+              {status !== "sending" && <span aria-hidden="true"> ↗</span>}
             </button>
           </form>
         </div>

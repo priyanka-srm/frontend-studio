@@ -1,4 +1,3 @@
-
 import "./Projects.css";
 
 const projects = [
@@ -53,8 +52,8 @@ function Projects() {
             </h2>
 
             <p>
-              A collection of projects where I turn concepts into
-              working applications and learn by building.
+              A collection of projects where I turn concepts into working
+              applications and learn by building.
             </p>
           </div>
         </div>
@@ -69,15 +68,11 @@ function Projects() {
 
               <div className="project-content">
                 <div className="project-intro">
-                  <span className="project-category">
-                    {project.category}
-                  </span>
+                  <span className="project-category">{project.category}</span>
 
                   <h3>{project.name}</h3>
 
-                  <p className="project-description">
-                    {project.description}
-                  </p>
+                  <p className="project-description">{project.description}</p>
                 </div>
 
                 <div className="project-details">
