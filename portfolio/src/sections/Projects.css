@@ -1,0 +1,227 @@
+
+.projects-section {
+  padding: 120px 0;
+  background: var(--color-bg);
+}
+
+.projects-container {
+  width: min(1160px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.projects-heading {
+  margin-bottom: 72px;
+}
+
+.projects-heading-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.projects-heading-content h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.065em;
+}
+
+.projects-heading-content h2 span {
+  color: var(--color-accent);
+}
+
+.projects-heading-content p {
+  max-width: 340px;
+  margin: 0 0 8px;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.projects-list {
+  border-top: 1px solid var(--color-border);
+}
+
+.project-item {
+  padding: 36px 0 48px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.project-number,
+.project-type,
+.project-category {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-content {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 64px;
+}
+
+.project-category {
+  color: var(--color-accent);
+}
+
+.project-intro h3 {
+  margin: 14px 0 16px;
+  color: var(--color-text);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+}
+
+.project-description {
+  max-width: 520px;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+  line-height: 1.9;
+}
+
+.project-details {
+  display: grid;
+  gap: 32px;
+}
+
+.project-details h4 {
+  margin: 0 0 16px;
+  color: var(--color-text);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+.project-highlights ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-highlights li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.project-highlights li::before {
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  content: '';
+}
+
+.project-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.project-tech-list span {
+  padding: 8px 13px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.project-tech-list span:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+/* Project links */
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.project-link:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.project-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+  .projects-section {
+    padding: 88px 0;
+  }
+
+  .projects-heading {
+    margin-bottom: 48px;
+  }
+
+  .projects-heading-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .projects-heading-content p {
+    max-width: 100%;
+  }
+
+  .project-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .project-item {
+    padding: 28px 0 36px;
+  }
+
+  .project-links {
+    gap: 10px;
+  }
+}
