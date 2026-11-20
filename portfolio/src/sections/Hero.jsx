@@ -1,3 +1,4 @@
+
 import "./Hero.css"
 
 const highlights = ["React", "JavaScript", "Responsive UI"];
@@ -38,7 +39,7 @@ function Hero() {
           <div className="hero-actions">
             <a className="hero-button hero-button-primary" href="#projects">
               View my work
-              <span aria-hidden="true">Γåù</span>
+              <span aria-hidden="true">↗</span>
             </a>
 
             <a className="hero-button hero-button-secondary" href="#contact">
@@ -121,7 +122,7 @@ function Hero() {
           </div>
 
           <div className="floating-chip chip-react">
-            <span className="chip-symbol">ΓÜ¢</span>
+            <span className="chip-symbol">⚛</span>
             React
           </div>
 
@@ -130,8 +131,8 @@ function Hero() {
             JavaScript
           </div>
 
-          <div className="visual-decoration decoration-top">Γ£│</div>
-          <div className="visual-decoration decoration-bottom">Γ£ª</div>
+          <div className="visual-decoration decoration-top">✳</div>
+          <div className="visual-decoration decoration-bottom">✦</div>
         </div>
       </div>
 
