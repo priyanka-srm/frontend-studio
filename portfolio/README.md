@@ -1,96 +1,90 @@
-\# Priyanka S. — Frontend Developer Portfolio
 
+# Priyanka S. | Frontend Developer
 
+A personal portfolio website built with **React, JavaScript, HTML5, and CSS3** to showcase my frontend development skills, projects, and educational background.
 
-A personal portfolio built with React to showcase my frontend development skills, projects, and education.
+The portfolio highlights my technical skills, hands-on projects, and continuous learning journey through a clean, modern, and responsive interface.
 
+## 🌐 Live Portfolio
 
+[Visit My Portfolio](https://priyanka-portfolio-eight-navy.vercel.app/)
 
-\## Tech Stack
+## 🛠️ Tech Stack
 
+- **Frontend:** React, JavaScript
+- **Web Technologies:** HTML5, CSS3
+- **Build Tool:** Vite
+- **Version Control:** Git, GitHub
 
+## ✨ Features
 
-\- React
+- Professional introduction and profile overview
+- About Me section
+- Technical skills and technologies
+- Featured frontend projects
+- Educational background
+- Contact information and social links
+- Responsive design for different screen sizes
+- Direct links to project demos and source code
 
-\- JavaScript
+## 🚀 Featured Projects
 
-\- HTML5
+### 1. Smart Movie Explorer
 
-\- CSS3
+A React-based movie discovery application that allows users to search for movies, explore movie details, and manage their favorite movies.
 
-\- Vite
+- **Live Demo:** [View Project](https://frontend-studio-inky.vercel.app/)
+- **GitHub:** [View Source Code](https://github.com/priyanka-srm/frontend-studio/tree/main/smart-movie-explorer-react)
 
+### 2. TestFlow
 
+A React application showcasing frontend development concepts, task management, and practical React testing workflows.
 
-\## Portfolio Sections
+- **Live Demo:** [View Project](https://testflow-sand.vercel.app/)
+- **GitHub:** [View Source Code](https://github.com/priyanka-srm/frontend-studio/tree/main/testflow)
 
+## 🎓 Education
 
+**B.E. Electronics and Instrumentation Engineering**
 
-\- Hero and Introduction
+SRM Valliammai Engineering College
 
-\- About Me
+## 💻 Run Locally
 
-\- Technical Skills
+To run this project on your local machine:
 
-\- Featured Projects
-
-\- Education
-
-\- Contact
-
-
-
-\## Featured Projects
-
-
-
-\### Smart Movie Explorer
-
-
-
-A React movie discovery application with search, movie details, and favorites.
-
-
-
-\- Live Demo: https://frontend-studio-inky.vercel.app/
-
-\- GitHub: https://github.com/priyanka-srm/frontend-studio/tree/main/smart-movie-explorer-react
-
-
-
-\### TestFlow
-
-
-
-A React application demonstrating frontend development concepts, testing, and task management.
-
-
-
-\- Live Demo: https://testflow-sand.vercel.app/
-
-\- GitHub: https://github.com/priyanka-srm/frontend-studio/tree/main/testflow
-
-
-
-\## Contact
-
-
-
-\- GitHub: https://github.com/priyanka-srm
-
-\- LinkedIn: https://www.linkedin.com/in/priyanka-s-571b9822b/
-
-\- Email: priyankaswaminathan09@gmail.com
-
-
-
-\## Run Locally
-
-
+**1. Clone the repository**
 
 ```bash
+git clone https://github.com/priyanka-srm/priyanka-portfolio.git
+```
 
+**2. Navigate to the project directory**
+
+```bash
+cd priyanka-portfolio
+```
+
+**3. Install dependencies**
+
+```bash
 npm install
+```
 
+**4. Start the development server**
+
+```bash
 npm run dev
+```
 
+Open the local URL displayed in your terminal to view the application.
+
+## 📬 Connect With Me
+
+- **GitHub:** [priyanka-srm](https://github.com/priyanka-srm)
+- **LinkedIn:** [Priyanka S.](https://www.linkedin.com/in/priyanka-s-571b9822b/)
+- **Email:** [priyankaswaminathan09@gmail.com](mailto:priyankaswaminathan09@gmail.com)
+
+---
+
+*Thank you for visiting my portfolio!*
